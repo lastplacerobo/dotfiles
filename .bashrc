@@ -22,7 +22,8 @@ bind 'set completion-ignore-case on'
 bind 'set show-all-if-ambiguous on'
 
 # Set up prompt nicely
-export PS1="\u@\h\$ \e[30;1m\w\e[0m\n\$ "
+export PS1='\[\e[1;30m\]\t`if [ $? = 0 ]; then echo "\[\e[32m\] ✔ "; else echo "\[\e[31m\] ✘ "; fi`\[\e[0;36m\]\u\[\e[0m\]@\h \[\e[1;34m\]\w \$\[\e[0m\] '
+
 
 #Misc.
 export EDITOR='vim'
