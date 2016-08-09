@@ -28,6 +28,9 @@ export PS1='\[\e[1;30m\]\t`if [ $? = 0 ]; then echo "\[\e[32m\] ✔ "; else echo
 #Misc.
 export EDITOR='vim'
 export LANG=en_US.UTF-8
+alias ll='ls -ahlF --color=auto'
+alias grep="/bin/grep --color=auto"
+
 #Enable ctr + s backward search
 stty -ixon
 
