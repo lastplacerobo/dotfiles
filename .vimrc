@@ -14,14 +14,6 @@ map åå :call ShowLongLines()<cr>
 " Toggle spaces/tabs highlighting,
 map ÅÅ :call SeeTabs()<cr>
 
-" Toggle spell checking,
-map ää :setlocal spell!<cr>
-
-" Never do sudo vim again,
-cmap w!! w !sudo tee %
-
-" Not really sure,
-scriptencoding utf-8
 
 " Set some reasonable defaults
 set autoindent          " Simple indent
@@ -59,12 +51,6 @@ set backupskip=/tmp/
 set directory=/tmp
 set writebackup
 
-" Testing folding,
-set foldenable          " enable folding
-set foldlevelstart=10   " open most folds by default
-set foldnestmax=10      " 10 nested fold max
-nnoremap <space> za
-
 " Highlight pattern for tabs and dangling spaces,
 :highlight ExtraWhitespace ctermbg=darkgreen guibg=lightgreen
 :match ExtraWhitespace /\s\+$\| \+\ze\t/
@@ -75,29 +61,9 @@ autocmd BufReadPost *
      \   exe "normal! g`\"" |
      \ endif
 
-" Some magic,
-augroup configgroup
-    autocmd!
-    autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
-    autocmd BufEnter Makefile setlocal noexpandtab
-augroup END
-
-" Activate spell checking,
-"setlocal spell!
-
-
-
 "
 " Functions
 "
-
-" Returns true if paste mode is enabled
-function! HasPaste()
-    if &paste
-        return 'PASTE MODE  '
-    en
-    return ''
-endfunction
 
 " Function to toggle high lightning on long lines,
 function! ShowLongLines()
@@ -121,18 +87,6 @@ function! SeeTabs()
     silent match ExtraWhitespace /uraynmyq/
   endif
 endfunc
-
-" Removes dangling spaces, called on buffer write in the autogroup above.
-function! <SID>StripTrailingWhitespaces()
-    " save last search & cursor position
-    let _s=@/
-    let l = line(".")
-    let c = col(".")
-    %s/\s\+$//e
-    let @/=_s
-    call cursor(l, c)
-endfunction
-
 
 " Call these at startup,
 call ShowLongLines()
